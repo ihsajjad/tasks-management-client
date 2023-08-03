@@ -12,7 +12,7 @@ const AddATask = () => {
   };
 
   return (
-    <div className="w-50">
+    <div className="w-50 px-5">
       <h3 className="fs-3 text-center">Add A Tasks</h3>
       <Formik
         validationSchema={schema}
