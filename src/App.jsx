@@ -1,21 +1,15 @@
-import "./App.css";
+// import { Button } from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form } from "react-bootstrap";
+import ListsOfTasks from "./components/ListsOfTasks";
+import AddATask from "./components/AddATask";
 
 function App() {
   return (
-    <>
-      <Form>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="name@example.com" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Example textarea</Form.Label>
-          <Form.Control as="textarea" rows={3} />
-        </Form.Group>
-      </Form>
-    </>
+    <div className="p-3 mt-4 d-flex justify-content-between gap-4 w-100">
+      <AddATask />
+
+      <ListsOfTasks />
+    </div>
   );
 }
 
