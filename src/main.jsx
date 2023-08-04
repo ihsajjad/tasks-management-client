@@ -8,6 +8,7 @@ const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    {/*QueryClientProvider for tanstack query*/}
     <QueryClientProvider client={queryClient}>
       <App />
     </QueryClientProvider>

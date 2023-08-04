@@ -1,18 +1,38 @@
 import { Formik } from "formik";
 import { Col, Form, Row, Button } from "react-bootstrap";
 import * as yup from "yup";
+import useAxios from "../hooks/useAxios";
+import useLoadingTasks from "../hooks/useLoadingTasks";
+import Swal from "sweetalert2";
 
 const AddATask = () => {
+  const { refetch } = useLoadingTasks();
+  const { axiosFetch } = useAxios();
+
   const schema = yup.object().shape({
     title: yup.string().required(),
     description: yup.string().required(),
   });
-  const handleAddTask = (data) => {
-    console.log({ ...data, status: "active" });
+  const handleAddTask = async (task, { resetForm }) => {
+    const newTask = { ...task, status: "active" };
+
+    const { data } = await axiosFetch.post("new-task", { newTask });
+
+    if (data.acknowledged) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your task has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      refetch();
+      resetForm();
+    }
   };
 
   return (
-    <div className="w-50 px-5">
+    <div className=" px-6 mb-3 form-container">
       <h3 className="fs-3 text-center">Add A Tasks</h3>
       <Formik
         validationSchema={schema}
@@ -27,7 +47,7 @@ const AddATask = () => {
             <Row className="mb-3">
               <Form.Group
                 as={Col}
-                className="w-75"
+                className="w-100"
                 md="4"
                 controlId="validationFormik01"
               >
@@ -50,7 +70,7 @@ const AddATask = () => {
               <Form.Group
                 as={Col}
                 md="6"
-                className="w-75"
+                className="w-100"
                 controlId="validationFormik03"
               >
                 <Form.Label>Description</Form.Label>

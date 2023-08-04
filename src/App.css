@@ -1,0 +1,6 @@
+.form-container {
+  position: -webkit-sticky;
+  position: sticky;
+  height: max-content;
+  top: 20px;
+}
